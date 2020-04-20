@@ -10,8 +10,7 @@ func routes(_ app: Application) throws {
         return "Hello, world!"
     }
 
-    let todoController = TodoController()
-    app.get("todos", use: todoController.index)
-    app.post("todos", use: todoController.create)
-    app.delete("todos", ":todoID", use: todoController.delete)
+    try app.group("api") { api in
+        try api.register(collection: AuthController())
+    }
 }
